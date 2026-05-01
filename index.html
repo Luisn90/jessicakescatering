@@ -484,129 +484,137 @@ footer{
 }
 
 
+
+
+
 /* ── HAMBURGER ── */
 .hamburger {
   display: none;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 4px;
-  z-index: 101;
+  padding: 6px;
+  z-index: 300;
+  position: relative;
 }
 .hamburger span {
   display: block;
-  width: 100%;
+  width: 22px;
   height: 0.5px;
   background: var(--gold);
-  transform-origin: center;
-  transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s ease;
+  transition: transform 0.35s ease, opacity 0.25s ease;
 }
-.hamburger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* ── MOBILE MENU OVERLAY ── */
+/* ── MOBILE MENU ── */
 .mobile-menu {
+  display: none;
   position: fixed;
   inset: 0;
-  z-index: 99;
-  background: var(--black);
-  display: flex;
+  z-index: 200;
+  background: #0A0A08;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 0 32px 48px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+  overflow-y: auto;
 }
 .mobile-menu.open {
   opacity: 1;
   visibility: visible;
 }
-.mobile-menu::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,206,175,0.04) 0%, transparent 70%);
-  pointer-events: none;
+.mobile-menu-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  border-bottom: 0.5px solid rgba(232,206,175,0.1);
+  margin-bottom: 40px;
+  flex-shrink: 0;
+}
+.mobile-menu-logo {
+  font-family: 'Tenor Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
 }
 .mobile-menu-close {
-  position: absolute;
-  top: 24px; right: 24px;
   background: transparent;
-  border: none;
-  color: var(--gold-dim);
-  font-size: 18px;
+  border: 0.5px solid rgba(232,206,175,0.2);
+  color: var(--gold);
+  font-size: 14px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  transition: color 0.3s;
+  transition: border-color 0.3s, color 0.3s;
+  line-height: 1;
+  padding: 0;
 }
-.mobile-menu-close:hover { color: var(--gold); }
+.mobile-menu-close:hover {
+  border-color: var(--gold);
+  color: var(--gold-pale);
+}
 .mobile-nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex: 1;
   gap: 0;
-  width: 100%;
 }
 .mobile-nav-link {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 10vw, 52px);
+  font-size: 44px;
   font-weight: 300;
-  color: rgba(232,206,175,0.35);
+  color: rgba(232,206,175,0.25);
   text-decoration: none;
-  letter-spacing: 0.02em;
-  padding: 14px 0;
-  border-bottom: 0.5px solid rgba(232,206,175,0.06);
-  width: 100%;
-  text-align: center;
-  transition: color 0.3s, letter-spacing 0.3s;
-  transform: translateY(20px);
+  padding: 18px 0;
+  border-bottom: 0.5px solid rgba(232,206,175,0.07);
+  transition: color 0.3s, padding-left 0.3s;
   opacity: 0;
-  transition: color 0.3s, opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(16px);
+  transition: color 0.3s, padding-left 0.3s, opacity 0.4s ease, transform 0.4s ease;
 }
-.mobile-menu.open .mobile-nav-link {
-  opacity: 1;
-  transform: translateY(0);
-}
-.mobile-menu.open .mobile-nav-link:nth-child(1) { transition-delay: 0.1s; }
-.mobile-menu.open .mobile-nav-link:nth-child(2) { transition-delay: 0.18s; }
-.mobile-menu.open .mobile-nav-link:nth-child(3) { transition-delay: 0.26s; }
-.mobile-menu.open .mobile-nav-link:nth-child(4) { transition-delay: 0.34s; }
-.mobile-nav-link:hover { color: var(--gold); letter-spacing: 0.06em; }
+.mobile-menu.open .mobile-nav-link { opacity: 1; transform: translateY(0); }
+.mobile-menu.open .mobile-nav-link:nth-child(1) { transition-delay: 0.08s; }
+.mobile-menu.open .mobile-nav-link:nth-child(2) { transition-delay: 0.16s; }
+.mobile-menu.open .mobile-nav-link:nth-child(3) { transition-delay: 0.24s; }
+.mobile-menu.open .mobile-nav-link:nth-child(4) { transition-delay: 0.32s; }
+.mobile-nav-link:hover { color: var(--gold); padding-left: 8px; }
 .mobile-nav-cta {
+  display: block;
   margin-top: 40px;
   font-size: 10px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--black);
   background: var(--gold);
-  padding: 16px 48px;
+  padding: 16px;
+  text-align: center;
   text-decoration: none;
   transition: background 0.3s;
   opacity: 0;
-  transform: translateY(20px);
-  transition: background 0.3s, opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(16px);
+  transition: background 0.3s, opacity 0.4s ease 0.4s, transform 0.4s ease 0.4s;
 }
-.mobile-menu.open .mobile-nav-cta {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.42s;
-}
+.mobile-menu.open .mobile-nav-cta { opacity: 1; transform: translateY(0); }
 .mobile-nav-cta:hover { background: var(--gold-pale); }
 
 @media (max-width: 768px) {
   .hamburger { display: flex; }
+  .mobile-menu { display: flex; }
   .nav-cta { display: none; }
-}
-@media (min-width: 769px) {
-  .mobile-menu { display: none !important; }
+  .nav-links { display: none; }
 }
 
 </style>
@@ -619,14 +627,17 @@ footer{
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
-  <button class="mobile-menu-close" id="mobile-close">✕</button>
+  <div class="mobile-menu-top">
+    <span class="mobile-menu-logo">Jessicakes</span>
+    <button class="mobile-menu-close" id="mobile-close" type="button">&#10005;</button>
+  </div>
   <nav class="mobile-nav">
     <a href="#services" class="mobile-nav-link">Services</a>
     <a href="#about" class="mobile-nav-link">About</a>
     <a href="#testimonials" class="mobile-nav-link">Reviews</a>
     <a href="#contact" class="mobile-nav-link">Contact</a>
-    <a href="#contact" class="mobile-nav-cta">Book an Event</a>
   </nav>
+  <a href="#contact" class="mobile-nav-cta">Book an Event</a>
 </div>
 
 <!-- LOADER -->
@@ -1023,11 +1034,13 @@ window.addEventListener('scroll', () => {
   if (sub) sub.style.transform = `translateY(${sy * 0.12}px)`;
 });
 
+
+
+
 // HAMBURGER MENU
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
 const mobileClose = document.getElementById('mobile-close');
-const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta');
 
 function openMenu() {
   mobileMenu.classList.add('open');
@@ -1039,9 +1052,13 @@ function closeMenu() {
   hamburger.classList.remove('open');
   document.body.style.overflow = '';
 }
+
 hamburger.addEventListener('click', openMenu);
 mobileClose.addEventListener('click', closeMenu);
-mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta').forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
 
 </script>
 </body>
