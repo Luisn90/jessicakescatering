@@ -506,10 +506,11 @@ footer{
 .hamburger span {
   display: block;
   width: 22px;
-  height: 0.5px;
+  height: 1px;
   background: var(--gold);
   transform-origin: center;
   transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s ease;
+  border-radius: 1px;
 }
 .hamburger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
@@ -528,7 +529,7 @@ footer{
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
-  padding: 80px 24px 60px;
+  padding: 0 24px;
 }
 .mobile-menu.open {
   opacity: 1;
@@ -543,19 +544,23 @@ footer{
 }
 .mobile-menu-logo {
   position: absolute;
-  top: 24px;
-  left: 24px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60px);
   opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+  transition: opacity 0.5s ease 0.1s;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
 }
 .mobile-menu-logo svg {
-  height: 36px !important;
+  height: 44px !important;
   width: auto !important;
 }
 .mobile-menu.open .mobile-menu-logo {
   opacity: 1;
-  transform: translateY(0);
 }
 .mobile-nav {
   display: flex;
@@ -1222,6 +1227,35 @@ footer{
   .nav-links { display: none; }
 }
 
+
+/* Mobile menu inner layout */
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  height: 100%;
+  padding: 100px 24px 60px;
+}
+.mobile-menu-logo-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.5s ease 0.05s, transform 0.5s ease 0.05s;
+}
+.mobile-menu-logo-top svg {
+  height: 50px !important;
+  width: auto !important;
+}
+.mobile-menu.open .mobile-menu-logo-top {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 </style>
 </head>
 <body>
@@ -1232,8 +1266,9 @@ footer{
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
-  <div class="mobile-menu-logo">
-    <svg style="height:52px;width:auto;display:block;" viewBox="0 0 277 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-logo-top">
+      <svg style="height:52px;width:auto;display:block;" viewBox="0 0 277 79" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_4173_42)">
 <path d="M65.8901 25.0698C67.0801 25.8098 68.3101 26.4598 69.5701 26.9998C70.8301 27.5398 71.9801 27.8198 73.0101 27.8198C74.0401 27.8198 74.7901 27.5198 75.4201 26.9098C76.0401 26.2998 76.3801 25.2398 76.4401 23.7298V4.13977C76.4401 3.44977 76.2901 2.79977 75.9801 2.18977C75.6701 1.57977 75.2201 1.09977 74.6101 0.759766H80.9801C80.3701 1.09977 79.9101 1.57977 79.6101 2.18977C79.3001 2.79977 79.1501 3.44977 79.1501 4.13977V21.8098C79.1501 23.0598 78.9001 24.1398 78.3901 25.0498C77.8901 25.9698 77.2201 26.7198 76.4001 27.3198C75.5801 27.9198 74.6401 28.3598 73.5901 28.6498C72.5401 28.9398 71.4701 29.0898 70.3901 29.0898C68.6701 29.0898 67.0601 28.7598 65.5801 28.0898L65.9001 25.0698H65.8901Z" fill="#E8CEAF"/>
 <path d="M82.6504 28.6098C83.2604 28.2698 83.7204 27.7898 84.0204 27.1798C84.3304 26.5698 84.4804 25.9198 84.4804 25.2298V4.13977C84.4804 3.44977 84.3304 2.79977 84.0204 2.18977C83.7204 1.57977 83.2604 1.09977 82.6504 0.759766H99.8004L100.28 4.41977C99.7504 3.43977 99.1004 2.68977 98.3304 2.16977C97.5604 1.64977 96.6204 1.38977 95.5104 1.38977H87.1904V13.1298H92.8004C93.4604 13.1298 94.1104 12.9798 94.7304 12.6698C95.3504 12.3698 95.8404 11.9098 96.1804 11.2998V15.5998C95.8404 14.9898 95.3504 14.5298 94.7304 14.2298C94.1104 13.9298 93.4604 13.7698 92.8004 13.7698H87.1904V27.9798H96.4604C97.5704 27.9798 98.5104 27.7198 99.2704 27.1998C100.03 26.6798 100.68 25.9298 101.24 24.9498L100.76 28.6098H82.6504Z" fill="#E8CEAF"/>
@@ -1274,14 +1309,15 @@ footer{
 </clipPath>
 </defs>
 </svg>
+    </div>
+    <nav class="mobile-nav">
+      <a href="#services" class="mobile-nav-link">Services</a>
+      <a href="#about" class="mobile-nav-link">About</a>
+      <a href="#testimonials" class="mobile-nav-link">Reviews</a>
+      <a href="#contact" class="mobile-nav-link">Contact</a>
+      <a href="#contact" class="mobile-nav-cta">Book an Event</a>
+    </nav>
   </div>
-  <nav class="mobile-nav">
-    <a href="#services" class="mobile-nav-link">Services</a>
-    <a href="#about" class="mobile-nav-link">About</a>
-    <a href="#testimonials" class="mobile-nav-link">Reviews</a>
-    <a href="#contact" class="mobile-nav-link">Contact</a>
-    <a href="#contact" class="mobile-nav-cta">Book an Event</a>
-  </nav>
 </div>
 
 <!-- LOADER -->
